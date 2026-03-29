@@ -12,7 +12,12 @@ import {
   Heart, 
   Star, 
   MessageCircle, 
-  ShieldCheck 
+  ShieldCheck,
+  Trash2,
+  Copy,
+  Edit,
+  LogOut,
+  Bell,
 } from "lucide-react";
 
 import { Avatar } from "@/components/Avatar";
@@ -23,6 +28,8 @@ import { CircularProgress } from "@/components/Progress/CircularProgress";
 import { StepProgress } from "@/components/Progress/StepProgress";
 import { UploadProgress } from "@/components/Progress/UploadProgress";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/Accordion";
+import { Tabs } from "@/components/Tabs";
+import { Dropdown } from "@/components/Dropdown";
 
 export default function DesignSystemPage() {
   const [progress, setProgress] = useState(0);
@@ -227,6 +234,71 @@ export default function DesignSystemPage() {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+          </div>
+        </section>
+
+        {/* Dropdown */}
+        <section className="space-y-8">
+          <h2 className="text-2xl font-bold text-ink dark:text-canvas">Dropdown Menu</h2>
+          <div className="flex flex-wrap gap-6">
+
+            {/* Basic */}
+            <Dropdown
+              trigger={
+                <button className="px-4 py-2 rounded-lg bg-purple-600 text-white text-sm font-medium hover:bg-purple-700 transition-colors">
+                  Actions
+                </button>
+              }
+              sections={[
+                {
+                  items: [
+                    { id: "edit", label: "Edit", icon: <Edit className="h-4 w-4" />, shortcut: "⌘E" },
+                    { id: "copy", label: "Copy link", icon: <Copy className="h-4 w-4" />, shortcut: "⌘C" },
+                  ],
+                },
+                {
+                  items: [
+                    { id: "delete", label: "Delete", icon: <Trash2 className="h-4 w-4" />, danger: true },
+                  ],
+                },
+              ]}
+            />
+
+            {/* With sections + submenu */}
+            <Dropdown
+              trigger={
+                <button className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-sm font-medium text-ink dark:text-canvas hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  Account
+                </button>
+              }
+              sections={[
+                {
+                  label: "Profile",
+                  items: [
+                    { id: "profile", label: "View profile", icon: <User className="h-4 w-4" /> },
+                    {
+                      id: "notifications",
+                      label: "Notifications",
+                      icon: <Bell className="h-4 w-4" />,
+                      submenu: [
+                        { id: "notif-all", label: "All notifications" },
+                        { id: "notif-tips", label: "Tips only" },
+                        { id: "notif-off", label: "Turn off", danger: true },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: "System",
+                  items: [
+                    { id: "settings", label: "Settings", icon: <Settings className="h-4 w-4" />, shortcut: "⌘," },
+                    { id: "disabled", label: "Billing (soon)", icon: <Layout className="h-4 w-4" />, disabled: true },
+                    { id: "logout", label: "Log out", icon: <LogOut className="h-4 w-4" />, danger: true },
+                  ],
+                },
+              ]}
+            />
+
           </div>
         </section>
 
